@@ -7,6 +7,7 @@ public class VrEscape : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject vrPlay;
+    public GameObject vrVideoPlayer;
     public GameObject vrlist;
     public GameObject exitPopUp;
     void Start()
@@ -22,8 +23,14 @@ public class VrEscape : MonoBehaviour
         {
             if(vrPlay.activeSelf)
             {
-                vrlist.SetActive(true);
+                vrlist.GetComponent<CanvasGroup>().alpha = 1;
+                vrlist.GetComponent<CanvasGroup>().blocksRaycasts = true;
                 vrPlay.SetActive(false);
+                vrVideoPlayer.SetActive(false);
+            }
+            else
+            {
+                exitPopUp.SetActive(true);
             }
         }
     }

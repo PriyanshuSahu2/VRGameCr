@@ -92,8 +92,9 @@ public class VrList : MonoBehaviour
         videopl.url= files[index];
         vrPlay.SetActive(true);      
         vrPLaybtns.SetActive(true);
-        videoList.SetActive(false);
-        
+       
+        videoList.GetComponent<CanvasGroup>().alpha =0;
+        videoList.GetComponent<CanvasGroup>().blocksRaycasts =false;
         //SceneManager.LoadScene(2);
     }
     public void onupdate()
