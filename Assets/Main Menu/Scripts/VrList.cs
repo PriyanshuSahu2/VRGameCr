@@ -1,10 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.Video;
+using UnityEngine.UI;
 public class VrList : MonoBehaviour
 {
     private GameObject[]  gameObject;
@@ -14,7 +13,10 @@ public class VrList : MonoBehaviour
     public GameObject cv;
     public VideoPlayer videopl;
     public GameObject videoList;
+    //canavas Of Pause ,x-axis,y-Axis
+    public GameObject vrPLaybtns;
     public GameObject videoPlBtn;
+     public GameObject vrPlay;
     public Texture txt;
 
 
@@ -27,8 +29,9 @@ public class VrList : MonoBehaviour
     IEnumerator playVideo()
     {
       videopl.Stop();
-        videoPlBtn.SetActive(false);
-        string path =@"C:\videos";
+        
+        // string path =@"C:\videos";
+        string path =@"M:\5-touban\";
         pathPreFix = @"file://";
         files = System.IO.Directory.GetFiles(path,"*.mp4");
         Debug.Log(files.Length);
@@ -87,8 +90,10 @@ public class VrList : MonoBehaviour
         Debug.Log(files[index]);
 
         videopl.url= files[index];
+        vrPlay.SetActive(true);      
+        vrPLaybtns.SetActive(true);
         videoList.SetActive(false);
-        videoPlBtn.SetActive(true);
+        
         //SceneManager.LoadScene(2);
     }
     public void onupdate()

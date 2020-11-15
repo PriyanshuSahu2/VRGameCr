@@ -32,14 +32,19 @@ namespace Michsky.UI.Zone
         private TextMeshProUGUI label;
         private TextMeshProUGUI labeHelper;
         private Animator selectorAnimator;
+        public static HorizontalSelector HS;
+        
 
         void Awake()
         {
             selectorAnimator = gameObject.GetComponent<Animator>();
             label = transform.Find("Text").GetComponent<TextMeshProUGUI>();
             labeHelper = transform.Find("Text Helper").GetComponent<TextMeshProUGUI>();
+            defaultIndex = PlayerPrefs.GetInt("MyFor");
+            Debug.Log("Skd"+ defaultIndex);
             label.text = elements[defaultIndex];
             labeHelper.text = label.text;
+
 
             if(invokeEventAtStart == true)
             {
@@ -50,6 +55,12 @@ namespace Michsky.UI.Zone
             {
                 this.enabled = false;
             }
+
+            
+        }
+        private void Start()
+        {
+
         }
 
         void Update()
@@ -76,6 +87,7 @@ namespace Michsky.UI.Zone
                     ForwardClick();
                 }
             }
+           Debug.Log(label);
         }
 
         public void PreviousClick()
@@ -113,10 +125,13 @@ namespace Michsky.UI.Zone
             {
                 index++;
             }
-
+            
             onValueChanged.Invoke();
             label.text = elements[index];
-
+            string st =  label.text;
+            Debug.Log(st);
+            PlayerPrefs.GetInt("MyFor",index);
+            Debug.Log("MyFor"+ PlayerPrefs.GetInt("MyFor",index));
             selectorAnimator.Play(null);
             selectorAnimator.StopPlayback();
             selectorAnimator.Play("Forward");
