@@ -5,6 +5,7 @@ using UnityEngine;
 public class VrPauseManager : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField] GameObject pauseMenu;
     void Start()
     {
         
@@ -13,6 +14,6 @@ public class VrPauseManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+   
     }
 }

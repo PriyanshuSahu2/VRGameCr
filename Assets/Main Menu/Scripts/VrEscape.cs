@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Video;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +14,8 @@ public class VrEscape : MonoBehaviour
     public GameObject pauseMenu;
     public Material videoRenderer;
     public Material nightBox;
+    public VideoPlayer videoPlayer;
+    public GameObject cameraSetting;
     void Start()
     {
         vrlist.SetActive(true);
@@ -20,7 +23,7 @@ public class VrEscape : MonoBehaviour
         pauseMenu.GetComponent<CanvasGroup>().alpha = 0;
         pauseMenu.GetComponent<CanvasGroup>().blocksRaycasts = false;
         RenderSettings.skybox = nightBox;
-        
+        cameraSetting.GetComponent<MouseLook>().enabled = false;
     }
 
     // Update is called once per frame
@@ -29,10 +32,26 @@ public class VrEscape : MonoBehaviour
         if(vrPlay.activeSelf)
         {
             RenderSettings.skybox = videoRenderer;
+            cameraSetting.GetComponent<MouseLook>().enabled = true;
         }
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(vrPlay.activeSelf)
+            Debug.Log("Pkaying");
+            if (videoPlayer.isPlaying)
+            {
+
+                videoPlayer.Pause();
+
+            }
+            else
+            {
+                videoPlayer.Play();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            cameraSetting.GetComponent<MouseLook>().enabled = false;
+            if (vrPlay.activeSelf)
             {
                 vrlist.GetComponent<CanvasGroup>().alpha = 1;
                 vrlist.GetComponent<CanvasGroup>().blocksRaycasts = true;
@@ -58,7 +77,8 @@ public class VrEscape : MonoBehaviour
     {
         vrlist.GetComponent<CanvasGroup>().alpha = 1;
         vrlist.GetComponent<CanvasGroup>().blocksRaycasts = true;
-        RenderSettings.skybox = videoRenderer;
+        pauseMenu.GetComponent<CanvasGroup>().alpha = 0;
+        pauseMenu.GetComponent<CanvasGroup>().blocksRaycasts = false;
 
     }
     public void MainMenu()
