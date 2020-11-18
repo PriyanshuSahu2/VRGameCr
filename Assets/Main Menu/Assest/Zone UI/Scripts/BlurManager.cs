@@ -42,7 +42,7 @@ namespace Michsky.UI.Zone
                 blurMaterial.SetFloat("_Size", currentBlurValue);
                 yield return null;
             }
-            StopCoroutine("BlurIn");
+           // StopCoroutine("BlurIn");
         }
 
         IEnumerator BlurOut()
@@ -67,12 +67,13 @@ namespace Michsky.UI.Zone
         public void BlurInAnim()
         {
             StopCoroutine("BlurOut");
-            StartCoroutine("BlurIn");
+            
+          //  StartCoroutine("BlurIn");
         }
 
         public void BlurOutAnim()
         {
-            StopCoroutine("BlurIn");
+           // StopCoroutine("BlurIn");
             StartCoroutine("BlurOut");
         }
 

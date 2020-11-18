@@ -14,6 +14,7 @@ public class KeyBindings : MonoBehaviour
     public Button jumpKey;
     public Button runKey;
     public Button crouchKey;
+    public GameObject bindPopup;
     string btnText;
     bool waitingForKey;
     KeyCode newKey;
@@ -47,6 +48,7 @@ public class KeyBindings : MonoBehaviour
     public void StartAsignment(string keyName)
     {
         if(!waitingForKey)
+           
             StartCoroutine(AssignKey(keyName));
     }
     public void sendText(TextMeshProUGUI text)
@@ -55,14 +57,20 @@ public class KeyBindings : MonoBehaviour
     }
     IEnumerator waitForKey()
     {
-        while(!keyEvent.isKey)
+        while (!keyEvent.isKey)
+        {
             yield return null;
-    }
+        }
+        }
    public IEnumerator AssignKey(string keyName)
 	{
 		waitingForKey = true;
-
-		yield return waitForKey(); //Executes endlessly until user presses a key
+        
+        yield return waitForKey(); //Executes endlessly until user presses a key
+        if(keyEvent.isKey)
+        {
+            bindPopup.GetComponent<CanvasGroup>().alpha = 0;
+        }
 
 		switch(keyName)
 		{

@@ -5,14 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class ChangeLeve : MonoBehaviour
 {
-public GameObject exitPopUp;
+public GameObject closePop;
 private void Update()
 {
-  if(Input.GetKeyDown(KeyCode.Escape))
-  {
-    exitPopUp.SetActive(true);
-  }
+
 }
+    public void MenuLevel()
+    {
+        SceneManager.LoadScene(0);
+    }
     public void ForestLevel()
     {
         SceneManager.LoadScene(1);
@@ -23,7 +24,7 @@ private void Update()
     }
     public void closePopUp()
     {
-      exitPopUp.SetActive(false);
+      closePop.SetActive(false);
     }
 
 }
