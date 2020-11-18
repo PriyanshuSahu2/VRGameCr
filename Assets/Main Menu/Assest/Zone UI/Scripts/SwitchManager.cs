@@ -7,7 +7,9 @@ namespace Michsky.UI.Zone
     {
         [Header("SWITCH")]
         public bool isOn;
+        public bool isAxisOn;
         private Animator switchAnimator;
+        public Animator anim;
 
         [Header("EVENT")]
         public UnityEvent onEvent;
@@ -19,11 +21,12 @@ namespace Michsky.UI.Zone
         void Start()
         {
             switchAnimator = gameObject.GetComponent<Animator>();
-            switchAnimator.Play(offTransition);
+            
 
             if (isOn == true)
             {
                 switchAnimator.Play(onTransition);
+                
                 onEvent.Invoke();
             }
 
@@ -33,22 +36,31 @@ namespace Michsky.UI.Zone
                 offEvent.Invoke();
             }
         }
+        
 
         public void AnimateSwitch()
         {
+
             if (isOn == true)
             {
                 switchAnimator.Play(offTransition);
                 offEvent.Invoke();
                 isOn = false;
+
             }
 
             else
             {
                 switchAnimator.Play(onTransition);
+                
                 onEvent.Invoke();
                 isOn = true;
             }
         }
+        private void Update()
+        {
+            
+        }
+
     }
 }
