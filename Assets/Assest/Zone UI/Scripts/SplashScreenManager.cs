@@ -75,7 +75,7 @@ namespace Michsky.UI.Zone
         {
             
             yield return new WaitForSeconds(2f);
-            SceneManager.LoadSceneAsync(0);
+            SceneManager.LoadSceneAsync(1);
             //print($"Time:{Time.time}");
             
         }

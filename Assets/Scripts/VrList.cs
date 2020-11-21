@@ -31,7 +31,7 @@ public class VrList : MonoBehaviour
       videopl.Stop();
         
         // string path =@"C:\videos";
-        string path =@"C:\videos\";
+        string path = @"C:\videos\";
         pathPreFix = @"file://";
         files = System.IO.Directory.GetFiles(path,"*.mp4");
         Debug.Log(files.Length);

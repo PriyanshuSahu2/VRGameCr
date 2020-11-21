@@ -23,6 +23,7 @@ public class VrEscape : MonoBehaviour
 
         RenderSettings.skybox = nightBox;
         cameraSetting.GetComponent<MouseLook>().enabled = false;
+        exitPopUp.SetActive(false);
     }
 
     // Update is called once per frame
@@ -57,17 +58,15 @@ public class VrEscape : MonoBehaviour
                 vrPlay.SetActive(false);
                 vrVideoPlayer.SetActive(false);
                 RenderSettings.skybox = nightBox;
-
             }
             else if(vrlist.GetComponent<CanvasGroup>().alpha ==1)
             {
+                Debug.Log("fIi");
+
                 vrlist.GetComponent<CanvasGroup>().alpha = 0;
                 vrlist.GetComponent<CanvasGroup>().blocksRaycasts = false;
-                MainMenu();
-            }
-            else
-            {
                 exitPopUp.SetActive(true);
+
             }
         }
     }
@@ -76,9 +75,10 @@ public class VrEscape : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
-     public void closePopUp()
+    public void CloseExitpopUp()
     {
-      exitPopUp.SetActive(false);
+        exitPopUp.SetActive(false);
     }
+
 
 }
