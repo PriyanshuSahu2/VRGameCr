@@ -16,6 +16,8 @@ public class VrEscape : MonoBehaviour
     public Material nightBox;
     public VideoPlayer videoPlayer;
     public GameObject cameraSetting;
+    public GameObject Playe;
+    public bool isPlay,isPause;
     void Start()
     {
         vrlist.SetActive(true);
@@ -24,19 +26,22 @@ public class VrEscape : MonoBehaviour
         RenderSettings.skybox = nightBox;
         cameraSetting.GetComponent<MouseLook>().enabled = false;
         exitPopUp.SetActive(false);
+        Playe.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(vrPlay.activeSelf)
+        if(vrPlay.activeSelf && Playe.activeSelf)
         {
-            Debug.Log("JIEJFPEJFJEFJPO");
+            
             RenderSettings.skybox = videoRenderer;
             cameraSetting.GetComponent<MouseLook>().enabled = true;
 
             vrlist.GetComponent<CanvasGroup>().alpha = 0;
             vrlist.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            isPause = true;
+            
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -54,21 +59,33 @@ public class VrEscape : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+           
             cameraSetting.GetComponent<MouseLook>().enabled = false;
-            if (vrPlay.activeSelf)
+            if (isPause)
             {
-                Debug.Log("HIFJJI");
+                exitPopUp.SetActive(true);               
+                isPlay = true;
+                Playe.SetActive(false);
+                isPause = false;
+                videoPlayer.Pause();
+                
+               
+            }
+            else if(isPlay )
+            {
+                exitPopUp.SetActive(false);
+                Debug.Log(isPlay);
                 vrlist.GetComponent<CanvasGroup>().alpha = 1;
                 vrlist.GetComponent<CanvasGroup>().blocksRaycasts = true;
                 vrPlay.SetActive(false);
-                vrVideoPlayer.SetActive(false);
                 RenderSettings.skybox = nightBox;
-            }
-            else if(vrlist.GetComponent<CanvasGroup>().alpha ==1)
-            {
-                Debug.Log("fIi");
-                exitPopUp.SetActive(true);
+                isPlay = false;
+                isPause = true;
 
+            }
+            else if(vrlist.GetComponent<CanvasGroup>().alpha == 1)
+            {
+                MainMenu();
             }
         }
     }
@@ -80,6 +97,8 @@ public class VrEscape : MonoBehaviour
     public void CloseExitpopUp()
     {
         exitPopUp.SetActive(false);
+        Playe.SetActive(true);
+        videoPlayer.Play();
     }
 
 

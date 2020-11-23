@@ -18,6 +18,7 @@ public class VrList : MonoBehaviour
     public GameObject videoPlBtn;
      public GameObject vrPlay;
     public Texture txt;
+    public GameObject isOn;
 
 
     public RenderTexture rt;
@@ -34,12 +35,12 @@ public class VrList : MonoBehaviour
         string path = @"M:\Bakuman";
         pathPreFix = @"file://";
         files = System.IO.Directory.GetFiles(path,"*.mp4");
-        Debug.Log(files.Length);
+        
 
         for(int i =0;i<files.Length;i++)
         {
          int index = i;
-            Debug.Log(i);
+            
         string s1 = files[i];
         string s3 = path;
         string s4 = ".mp4";
@@ -60,7 +61,7 @@ public class VrList : MonoBehaviour
           lm.targetTexture = rt;
           lm.frame = 111;lm.Prepare();
 
-          Debug.Log(lm.isPrepared);
+          
           yield return new WaitForSeconds(0.5f);
           lm.Pause();
         }
@@ -68,7 +69,7 @@ public class VrList : MonoBehaviour
          foreach(var pm in gb.GetComponentsInChildren<RawImage>()){pm.texture=rt;
          }
         foreach(var tm in gb.GetComponentsInChildren<TextMeshProUGUI>()){tm.text =s2;
-        Debug.Log(files[i]);
+        
               }
     }
 
@@ -86,19 +87,19 @@ public class VrList : MonoBehaviour
     void TaskOnClick(int index)
     {
 
-        print(index);
-        Debug.Log(files[index]);
+        
+        
 
         videopl.url= files[index];
         vrPlay.SetActive(true);      
         vrPLaybtns.SetActive(true);
+        isOn.SetActive(true);
        
 
         //SceneManager.LoadScene(2);
     }
     public void onupdate()
     {
-      Debug.Log("FPEFP");
     }
     void Update()
     {

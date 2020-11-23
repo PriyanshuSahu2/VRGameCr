@@ -401,17 +401,17 @@ public class FirstPersonAIO : MonoBehaviour {
         #endregion
 
         #region Input Settings - Update
-        if (canHoldJump ? (canJump && Input.GetButton("Jump")) : (Input.GetButtonDown("Jump") && canJump))
+        if (canHoldJump ? (canJump && Input.GetKey(GameManager.GM.Jump)) : (Input.GetKeyDown(GameManager.GM.Jump) && canJump))
         {
             jumpInput = true;
         }
-        else if (Input.GetButtonUp("Jump")) { jumpInput = false; }
+        else if (Input.GetKeyUp(GameManager.GM.Jump)) { jumpInput = false; }
 
 
         if (_crouchModifiers.useCrouch)
         {
-            if (!_crouchModifiers.toggleCrouch) { isCrouching = _crouchModifiers.crouchOverride || Input.GetKey(_crouchModifiers.crouchKey); }
-            else if (Input.GetKeyDown(_crouchModifiers.crouchKey)) { isCrouching = !isCrouching || _crouchModifiers.crouchOverride; }
+            if (!_crouchModifiers.toggleCrouch) { isCrouching = _crouchModifiers.crouchOverride || Input.GetKey(GameManager.GM.Crouch); }
+            else if (Input.GetKeyDown(GameManager.GM.Crouch)) { isCrouching = !isCrouching || _crouchModifiers.crouchOverride; }
         }
 
         if (Input.GetButtonDown("Cancel")) { ControllerPause(); }
@@ -438,7 +438,7 @@ public class FirstPersonAIO : MonoBehaviour {
 
         if (useStamina)
         {
-            isSprinting = Input.GetKey(sprintKey) && !isCrouching && staminaInternal > 0 && (Mathf.Abs(fps_Rigidbody.velocity.x) > 0.01f || Mathf.Abs(fps_Rigidbody.velocity.z) > 0.01f);
+            isSprinting = Input.GetKey(GameManager.GM.Run) && !isCrouching && staminaInternal > 0 && (Mathf.Abs(fps_Rigidbody.velocity.x) > 0.01f || Mathf.Abs(fps_Rigidbody.velocity.z) > 0.01f);
             if (isSprinting)
             {
                 staminaInternal -= (staminaDepletionSpeed * 2) * Time.deltaTime;
@@ -448,7 +448,7 @@ public class FirstPersonAIO : MonoBehaviour {
                     StaminaMeter.color = Vector4.MoveTowards(StaminaMeter.color, new Vector4(1, 1, 1, 1), 0.15f);
                 }
             }
-            else if ((!Input.GetKey(sprintKey) || Mathf.Abs(fps_Rigidbody.velocity.x) < 0.01f || Mathf.Abs(fps_Rigidbody.velocity.z) < 0.01f || isCrouching) && staminaInternal < staminaLevel)
+            else if ((!Input.GetKey(GameManager.GM.Run) || Mathf.Abs(fps_Rigidbody.velocity.x) < 0.01f || Mathf.Abs(fps_Rigidbody.velocity.z) < 0.01f || isCrouching) && staminaInternal < staminaLevel)
             {
                 staminaInternal += staminaDepletionSpeed * Time.deltaTime;
             }
@@ -464,7 +464,7 @@ public class FirstPersonAIO : MonoBehaviour {
             }
             staminaInternal = Mathf.Clamp(staminaInternal, 0, staminaLevel);
         }
-        else { isSprinting = Input.GetKey(sprintKey); }
+        else { isSprinting = Input.GetKey(GameManager.GM.Run); }
 
         Vector3 MoveDirection = Vector3.zero;
         speed = walkByDefault ? isCrouching ? walkSpeedInternal : (isSprinting ? sprintSpeedInternal : walkSpeedInternal) : (isSprinting ? walkSpeedInternal : sprintSpeedInternal);
