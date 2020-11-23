@@ -31,7 +31,7 @@ public class VrList : MonoBehaviour
       videopl.Stop();
         
         // string path =@"C:\videos";
-        string path = @"C:\videos\";
+        string path = @"M:\Bakuman";
         pathPreFix = @"file://";
         files = System.IO.Directory.GetFiles(path,"*.mp4");
         Debug.Log(files.Length);
@@ -93,8 +93,7 @@ public class VrList : MonoBehaviour
         vrPlay.SetActive(true);      
         vrPLaybtns.SetActive(true);
        
-        videoList.GetComponent<CanvasGroup>().alpha =0;
-        videoList.GetComponent<CanvasGroup>().blocksRaycasts =false;
+
         //SceneManager.LoadScene(2);
     }
     public void onupdate()

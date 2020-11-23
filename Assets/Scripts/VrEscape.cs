@@ -31,8 +31,12 @@ public class VrEscape : MonoBehaviour
     {
         if(vrPlay.activeSelf)
         {
+            Debug.Log("JIEJFPEJFJEFJPO");
             RenderSettings.skybox = videoRenderer;
             cameraSetting.GetComponent<MouseLook>().enabled = true;
+
+            vrlist.GetComponent<CanvasGroup>().alpha = 0;
+            vrlist.GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -53,6 +57,7 @@ public class VrEscape : MonoBehaviour
             cameraSetting.GetComponent<MouseLook>().enabled = false;
             if (vrPlay.activeSelf)
             {
+                Debug.Log("HIFJJI");
                 vrlist.GetComponent<CanvasGroup>().alpha = 1;
                 vrlist.GetComponent<CanvasGroup>().blocksRaycasts = true;
                 vrPlay.SetActive(false);
@@ -62,9 +67,6 @@ public class VrEscape : MonoBehaviour
             else if(vrlist.GetComponent<CanvasGroup>().alpha ==1)
             {
                 Debug.Log("fIi");
-
-                vrlist.GetComponent<CanvasGroup>().alpha = 0;
-                vrlist.GetComponent<CanvasGroup>().blocksRaycasts = false;
                 exitPopUp.SetActive(true);
 
             }
